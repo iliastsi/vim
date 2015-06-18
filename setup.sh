@@ -20,7 +20,7 @@ fi
 # Clone vundle
 if [ ! -e  $path/bundle/vundle ]; then
     echo "Cloning vundle"
-    git clone git://github.com/gmarik/vundle.git $path/bundle/vundle
+    git clone https://github.com/gmarik/vundle.git $path/bundle/vundle
 else
     echo "[E] $path/bundle/vundle exists.. aborting"
     exit 1

@@ -10,8 +10,8 @@ filetype off            " Required by Vundle
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
-" makes Vundle use `git` instead of `https` when building absolute repo
-let g:vundle_default_git_proto = 'git'
+" makes Vundle use `https` when building repo url
+let g:vundle_default_git_proto = 'https'
 
 " Github original repos
 Plugin 'gmarik/vundle'
