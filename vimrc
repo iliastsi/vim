@@ -148,18 +148,37 @@ runtime macros/matchit.vim
 " C code
 au FileType                 c,cpp
     \ setlocal cindent sw=8 ts=8 noet
+
 " Haskell code
 au FileType                 haskell
     \ setlocal sw=2 ts=2
+
 " Python code
 au FileType                 python
     \ setlocal sw=4 sts=4
+
 " Latex code
 au FileType                 tex
     \ setlocal tw=80 sw=2
+
 " Git commit message
+function! CommitMessages()
+    set spelllang=en_us spell
+    let g:git_ci_msg_user = substitute(system("git config --get user.name"),
+              \ '\n$', '', '')
+    let g:git_ci_msg_email = substitute(system("git config --get user.email"),
+              \ '\n$', '', '')
+
+    nmap S oSigned-off-by: <C-R>=printf("%s <%s>",
+              \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><CR><ESC>
+    nmap R oReviewed-by: <C-R>=printf("%s <%s>",
+                \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>
+endf
 au FileType                 gitcommit
-    \ set spelllang=en_us spell
+    \ call CommitMessages()
+au BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt
+    \ call CommitMessages()
+
 " Mail
 au FileType                 mail
     \ set spelllang=en_us,el spell
