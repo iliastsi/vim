@@ -147,7 +147,7 @@ runtime macros/matchit.vim
 
 " C code
 au FileType                 c,cpp
-    \ setlocal cindent sw=8 ts=8 noet
+    \ setlocal cindent sw=8 ts=8 noet cino=(sw
 
 " Haskell code
 au FileType                 haskell
@@ -180,8 +180,29 @@ au BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt
     \ call CommitMessages()
 
 " Mail
+function! MailSnip(type, ...)
+    let sel_save = &selection
+    let &selection = "inclusive"
+    let reg_save = @@
+
+    if a:0  " Invoked from Visual mode, use gv command.
+        silent execute "normal! gvc> \n> <snip>\n> "
+    elseif a:type == 'line'
+        silent exe "normal! '[V']c> \n> <snip>\n> "
+    else
+        silent exe "normal! `[v`]c> \n> <snip>\n> "
+    endif
+
+    let &selection = sel_save
+    let @@ = reg_save
+endfunction
+
 au FileType                 mail
     \ set spelllang=en_us,el spell
+au FileType                 mail
+    \ nnoremap <silent> <leader>sn :set opfunc=MailSnip<CR>g@
+au FileType                 mail
+    \ vnoremap <silent> <leader>sn :<C-U>call MailSnip(visualmode(), 1)<CR>
 
 
 "------------------------------------------------------------------------------
