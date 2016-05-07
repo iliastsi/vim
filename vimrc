@@ -20,7 +20,8 @@ Plugin 'jamessan/vim-gnupg'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'myusuf3/numbers.vim'
@@ -115,6 +116,7 @@ let g:airline#extensions#default#section_truncate_width = {
     \ 'z': 40,
     \ }
 " Mixed-indent errors
+let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " Syntastic
@@ -126,6 +128,9 @@ let g:syntastic_c_compiler_options = ' -Wall -Wextra'
 let g:syntastic_c_check_header = 1
 let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_c_config_file = '.syntastic_c_config'
+
+" GnuPG
+let g:GPGExecutable = "gpg2"
 
 
 "------------------------------------------------------------------------------
@@ -169,10 +174,10 @@ function! CommitMessages()
     let g:git_ci_msg_email = substitute(system("git config --get user.email"),
               \ '\n$', '', '')
 
-    nmap S oSigned-off-by: <C-R>=printf("%s <%s>",
-              \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><CR><ESC>
-    nmap R oReviewed-by: <C-R>=printf("%s <%s>",
-                \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>
+    nmap <leader>s oSigned-off-by: <C-R>=printf("%s <%s>",
+              \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
+    nmap <leader>r oReviewed-by: <C-R>=printf("%s <%s>",
+                \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
 endf
 au FileType                 gitcommit
     \ call CommitMessages()
@@ -186,11 +191,11 @@ function! MailSnip(type, ...)
     let reg_save = @@
 
     if a:0  " Invoked from Visual mode, use gv command.
-        silent execute "normal! gvc> \n> <snip>\n> "
+        silent execute "normal! gvc[...]"
     elseif a:type == 'line'
-        silent exe "normal! '[V']c> \n> <snip>\n> "
+        silent exe "normal! '[V']c[...]"
     else
-        silent exe "normal! `[v`]c> \n> <snip>\n> "
+        silent exe "normal! `[v`]c[...]"
     endif
 
     let &selection = sel_save
@@ -200,9 +205,9 @@ endfunction
 au FileType                 mail
     \ set spelllang=en_us,el spell
 au FileType                 mail
-    \ nnoremap <silent> <leader>sn :set opfunc=MailSnip<CR>g@
+    \ nnoremap <silent> <leader>n :set opfunc=MailSnip<CR>g@
 au FileType                 mail
-    \ vnoremap <silent> <leader>sn :<C-U>call MailSnip(visualmode(), 1)<CR>
+    \ vnoremap <silent> <leader>n :<C-U>call MailSnip(visualmode(), 1)<CR>
 
 
 "------------------------------------------------------------------------------
