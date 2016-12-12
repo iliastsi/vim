@@ -24,7 +24,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'myusuf3/numbers.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'iliastsi/hasksyn'
 " Github repos of user 'vim-scripts'
@@ -129,9 +128,6 @@ let g:syntastic_c_check_header = 1
 let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_c_config_file = '.syntastic_c_config'
 
-" GnuPG
-let g:GPGExecutable = "gpg2"
-
 
 "------------------------------------------------------------------------------
 " File-type specific settings.
@@ -202,7 +198,7 @@ function! MailSnip(type, ...)
     let @@ = reg_save
 endfunction
 
-au FileType                 mail
+au FileType                 mail,debchangelog
     \ set spelllang=en_us,el spell
 au FileType                 mail
     \ nnoremap <silent> <leader>n :set opfunc=MailSnip<CR>g@
