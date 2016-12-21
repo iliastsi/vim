@@ -26,6 +26,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'majutsushi/tagbar'
 Plugin 'iliastsi/hasksyn'
+Plugin 'ludovicchabant/vim-gutentags'
 " Github repos of user 'vim-scripts'
 Plugin 'grep.vim'
 Plugin 'tComment'
@@ -127,6 +128,9 @@ let g:syntastic_c_compiler_options = ' -Wall -Wextra'
 let g:syntastic_c_check_header = 1
 let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_c_config_file = '.syntastic_c_config'
+
+" gutentags
+let g:gutentags_tagfile = '.tags'
 
 
 "------------------------------------------------------------------------------
