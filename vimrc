@@ -118,6 +118,7 @@ let g:airline#extensions#default#section_truncate_width = {
 " Mixed-indent errors
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
 
 " Syntastic
 let g:syntastic_enable_balloons = 0
