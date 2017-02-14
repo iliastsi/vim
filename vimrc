@@ -24,7 +24,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'majutsushi/tagbar'
 Plugin 'iliastsi/hasksyn'
 Plugin 'ludovicchabant/vim-gutentags'
 " Github repos of user 'vim-scripts'
@@ -67,6 +66,7 @@ set nostartofline       " Do not jump to first character with page commands
 set laststatus=2        " status line
 set backspace=2         " Allow backspacing in insert mode
 set wildmode=list:longest " Path/file expansion in colon-mode
+set spelllang=en_us     " Set default spelling language
 
 " Create Greek dictionary
 " mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR
@@ -191,11 +191,11 @@ function! MailSnip(type, ...)
     let reg_save = @@
 
     if a:0  " Invoked from Visual mode, use gv command.
-        silent execute "normal! gvc[...]"
+        silent execute "normal! gvc> [...]"
     elseif a:type == 'line'
-        silent exe "normal! '[V']c[...]"
+        silent exe "normal! '[V']c> [...]"
     else
-        silent exe "normal! `[v`]c[...]"
+        silent exe "normal! `[v`]c> [...]"
     endif
 
     let &selection = sel_save
