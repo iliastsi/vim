@@ -131,7 +131,7 @@ let g:syntastic_c_auto_refresh_includes = 1
 let g:syntastic_c_config_file = '.syntastic_c_config'
 
 " gutentags
-let g:gutentags_tagfile = '.tags'
+let g:gutentags_ctags_tagfile = '.tags'
 
 
 "----------------------------------------------------------------------
