@@ -77,10 +77,13 @@ inoremap jk <esc>
 
 "----------------------------------------------------------------------
 " Colors
+" Enable true-colors using termguicolors
+" See `:h xterm-true-color` for the details
 "----------------------------------------------------------------------
-set t_Co=256
-let g:rehash256 = 1 " Alternative sheme under development
-colo molokai        " Set colorscheme
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+colo molokai
 
 " Highlight text over 80 columns
 let w:m1=matchadd('ErrorMsg', '\%>80v.\+', -1)
