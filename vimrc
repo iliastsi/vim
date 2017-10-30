@@ -213,6 +213,11 @@ au FileType                 mail
 au FileType                 mail
     \ vnoremap <silent> <leader>n :<C-U>call MailSnip(visualmode(), 1)<CR>
 
+" reStructuredText
+" https://docs.python.org/devguide/documenting.html
+au FileType rst
+    \ set sw=3 sts=3 et tw=80 spell
+
 
 "----------------------------------------------------------------------
 " Use Greek letters in command mode
