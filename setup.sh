@@ -17,14 +17,7 @@ else
     exit 1
 fi
 
-# Clone vundle
-if [ ! -e  $path/bundle/vundle ]; then
-    echo "Cloning vundle"
-    git clone https://github.com/gmarik/vundle.git $path/bundle/vundle
-else
-    echo "[E] $path/bundle/vundle exists.. aborting"
-    exit 1
-fi
-
-# Install bundles
-echo | vim -c ":PluginInstall" -c ":qall"
+# Initialize submodules
+cd $path
+git submodule update --init --remote --merge
+cd -

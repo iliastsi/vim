@@ -1,0 +1,39 @@
+[submodule "pack/default/start/ctrlp"]
+	path = pack/default/start/ctrlp
+	url = https://github.com/kien/ctrlp.vim
+[submodule "pack/default/start/gnupg"]
+	path = pack/default/start/gnupg
+	url = https://github.com/jamessan/vim-gnupg
+[submodule "pack/default/opt/molokai"]
+	path = pack/default/opt/molokai
+	url = https://github.com/tomasr/molokai
+[submodule "pack/default/start/surround"]
+	path = pack/default/start/surround
+	url = https://github.com/tpope/vim-surround
+[submodule "pack/default/start/syntastic"]
+	path = pack/default/start/syntastic
+	url = https://github.com/scrooloose/syntastic
+[submodule "pack/default/start/airline"]
+	path = pack/default/start/airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "pack/default/opt/airline-themes"]
+	path = pack/default/opt/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "pack/default/start/fugitive"]
+	path = pack/default/start/fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "pack/default/start/unimpaired"]
+	path = pack/default/start/unimpaired
+	url = https://github.com/tpope/vim-unimpaired
+[submodule "pack/default/start/hasksyn"]
+	path = pack/default/start/hasksyn
+	url = https://github.com/iliastsi/hasksyn
+[submodule "pack/default/start/grep"]
+	path = pack/default/start/grep
+	url = https://github.com/vim-scripts/grep.vim
+[submodule "pack/default/start/tComment"]
+	path = pack/default/start/tComment
+	url = https://github.com/vim-scripts/tComment
+[submodule "pack/default/start/airline-themes"]
+	path = pack/default/start/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes

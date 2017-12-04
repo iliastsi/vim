@@ -3,36 +3,6 @@
 " Author: Ilias Tsitsimpis <i.tsitsimpis@gmail.com>
 "----------------------------------------------------------------------
 
-"----------------------------------------------------------------------
-" Enable Vundle
-"----------------------------------------------------------------------
-filetype off            " Required by Vundle
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
-
-" makes Vundle use `https` when building repo url
-let g:vundle_default_git_proto = 'https'
-
-" Github original repos
-Plugin 'gmarik/vundle'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jamessan/vim-gnupg'
-Plugin 'tomasr/molokai'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'iliastsi/hasksyn'
-"Plugin 'ludovicchabant/vim-gutentags'
-" Github repos of user 'vim-scripts'
-Plugin 'grep.vim'
-Plugin 'tComment'
-
-" All of your Plugins must be added before the following line
-call vundle#end()
-
 
 "----------------------------------------------------------------------
 " Standard stuff.
@@ -151,7 +121,7 @@ let g:tex_flavor = 'latex'
 filetype plugin indent on
 
 " Matchit already installed in newer versions of vim.
-" No need to add this onto vundle. We only need to configure it.
+" No need to add this onto package. We only need to configure it.
 runtime macros/matchit.vim
 
 " C code
@@ -206,6 +176,7 @@ function! MailSnip(type, ...)
     let @@ = reg_save
 endfunction
 
+au BufRead,BufNewFile *mutt* set filetype=mail
 au FileType                 mail,debchangelog
     \ set spelllang=en_us,el spell
 au FileType                 mail
