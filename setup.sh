@@ -19,5 +19,5 @@ fi
 
 # Initialize submodules
 cd $path
-git submodule update --init --remote --merge
+git submodule update --init --remote --rebase
 cd -

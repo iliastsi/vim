@@ -33,7 +33,7 @@
 	url = https://github.com/vim-scripts/grep.vim
 [submodule "pack/default/start/tComment"]
 	path = pack/default/start/tComment
-	url = https://github.com/vim-scripts/tComment
+	url = https://github.com/tomtom/tcomment_vim.git
 [submodule "pack/default/start/airline-themes"]
 	path = pack/default/start/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
