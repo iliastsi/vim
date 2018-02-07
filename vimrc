@@ -71,11 +71,13 @@ autocmd WinEnter *
 " Configure plugins
 "----------------------------------------------------------------------
 " TagBar
+"-------
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " AirLine symbols
+"----------------
 let g:airline_symbols = {}
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
@@ -92,19 +94,20 @@ let g:airline#extensions#default#section_truncate_width = {
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+" Enable airline's native extension for ale
+let g:airline#extensions#ale#enabled = 1
 
-" Syntastic
-let g:syntastic_enable_balloons = 0
-let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
-"let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
-let g:syntastic_python_checkers = ['python', 'flake8']
-let g:syntastic_c_compiler_options = ' -Wall -Wextra'
-let g:syntastic_c_check_header = 1
-let g:syntastic_c_auto_refresh_includes = 1
-let g:syntastic_c_config_file = '.syntastic_c_config'
+" Ale
+"----
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_cache_executable_check_failures = 1
 
-" gutentags
-let g:gutentags_ctags_tagfile = '.tags'
+let g:ale_linters = {
+\ 'haskell': ['hdevtools', 'hlint'],
+\ 'python': ['python', 'flake8'],
+\ 'c': ['gcc'],
+\}
 
 
 "----------------------------------------------------------------------
@@ -125,7 +128,7 @@ filetype plugin indent on
 runtime macros/matchit.vim
 
 " C code
-au FileType                 c,cpp
+au FileType                 c,cpp,go
     \ setlocal cindent sw=8 ts=8 noet cino=(sw
 
 " Haskell code

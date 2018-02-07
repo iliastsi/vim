@@ -10,9 +10,6 @@
 [submodule "pack/default/start/surround"]
 	path = pack/default/start/surround
 	url = https://github.com/tpope/vim-surround
-[submodule "pack/default/start/syntastic"]
-	path = pack/default/start/syntastic
-	url = https://github.com/scrooloose/syntastic
 [submodule "pack/default/start/airline"]
 	path = pack/default/start/airline
 	url = https://github.com/vim-airline/vim-airline
@@ -37,3 +34,6 @@
 [submodule "pack/default/start/airline-themes"]
 	path = pack/default/start/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "pack/default/start/ale"]
+	path = pack/default/start/ale
+	url = https://github.com/w0rp/ale.git

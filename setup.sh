@@ -20,4 +20,5 @@ fi
 # Initialize submodules
 cd $path
 git submodule update --init --remote --rebase
+# git submodule summary
 cd -
