@@ -3,9 +3,29 @@
 " Author: Ilias Tsitsimpis <i.tsitsimpis@gmail.com>
 "----------------------------------------------------------------------
 
+"----------------------------------------------------------------------
+" Plugins
+"----------------------------------------------------------------------
+call plug#begin('~/.vim/plugged')
+
+Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'jamessan/vim-gnupg'
+Plug 'iliastsi/molokai'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+"Plug 'iliastsi/hasksyn'
+"Plug 'vim-scripts/grep.vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'w0rp/ale'
+
+call plug#end()
+
 
 "----------------------------------------------------------------------
-" Standard stuff.
+" Standard stuff
 "----------------------------------------------------------------------
 set nocompatible        " Disable vi compatibility
 set nojoinspaces        " Do not insert two spaces after a '.'
@@ -16,15 +36,14 @@ set showmatch           " Show matching brackets
 set showmode            " Show current mode
 set cursorline          " Highlight current line
 set number              " Line number
-set ignorecase          " No case sensitive matching
 set wildmenu            " Way cooler command line mode completion
 set smartcase           " Case insensitive matching (unless given upper case)
+set nofoldenable        " Disable folding
 set incsearch           " Incremental search
 set noautoindent        " I indent my code myself
 set scrolloff=5         " Keep a context when scrolling
 set nomodeline          " Disable modeline for security reasons
-set esckeys             " Cursor keys in insert mode
-"set gdefault           " Use 'g' flag by default with :s/foo/bar/
+set gdefault            " Use 'g' flag by default with :s/foo/bar/
 set magic               " Use 'magic' patterns (extended regular expressions)
 set tabstop=4           " Number of spaces <tab> counts for
 set shiftwidth=4        " Used by syntax files
@@ -70,11 +89,6 @@ autocmd WinEnter *
 "----------------------------------------------------------------------
 " Configure plugins
 "----------------------------------------------------------------------
-" TagBar
-"-------
-let g:tagbar_left = 1
-let g:tagbar_autoclose = 1
-nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 " AirLine symbols
 "----------------
@@ -100,7 +114,7 @@ let g:airline#extensions#ale#enabled = 1
 " Ale
 "----
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_cache_executable_check_failures = 1
 
 let g:ale_linters = {
@@ -114,6 +128,9 @@ let g:ale_linters = {
 " File-type specific settings.
 "----------------------------------------------------------------------
 syntax on
+
+" For *.h files use C syntax instead of C++
+let c_syntax_for_h = 1
 
 " Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
@@ -199,16 +216,3 @@ au FileType rst
 set langmap=ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR
 set langmap+=ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj
 set langmap+=κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz
-
-
-"----------------------------------------------------------------------
-" Generate help tags for packages
-" Put these lines at the very end of your vimrc file
-"----------------------------------------------------------------------
-
-" Load all plugins now.
-" Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL

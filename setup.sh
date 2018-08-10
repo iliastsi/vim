@@ -10,15 +10,22 @@ if [ "$path" != "$(dirname ~/.vim/setup.sh)" ]; then
 fi
 
 if [ ! -e ~/.vimrc ]; then
-    echo "$path/vimrc -> ~/.vimrc"
-    ln -s $path/vimrc ~/.vimrc
+    echo "~/.vim/vimrc -> ~/.vimrc"
+    ln -s ~/.vim/vimrc ~/.vimrc
 else
-    echo "[E] ~/.vimrc exists.. aborting"
+    echo "[E] ~/.vimrc exists... aborting"
     exit 1
 fi
 
-# Initialize submodules
-cd $path
-git submodule update --init --remote --rebase
-# git submodule summary
-cd -
+# Install vim-plug
+if [ ! -e ~/.vim/autoload/plug.vim ]; then
+    echo "Installing vim-plug"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+    echo "[E] ~/.vim/autoload/plug.vim exists... aborting"
+    exit 1
+fi
+
+# Install bundles
+echo | vim -c ":PlugInstall" -c ":qall"
