@@ -36,6 +36,7 @@ set showmatch           " Show matching brackets
 set showmode            " Show current mode
 set cursorline          " Highlight current line
 set number              " Line number
+set ignorecase          " No case sensitive matching
 set wildmenu            " Way cooler command line mode completion
 set smartcase           " Case insensitive matching (unless given upper case)
 set nofoldenable        " Disable folding
@@ -73,6 +74,7 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 colo molokai
+"colo desert
 
 " Highlight text over 80 columns
 let w:m1=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -89,6 +91,11 @@ autocmd WinEnter *
 "----------------------------------------------------------------------
 " Configure plugins
 "----------------------------------------------------------------------
+
+" CtrlP
+"------
+" Do not delete the cache files upon exiting Vim
+"let g:ctrlp_clear_cache_on_exit = 0
 
 " AirLine symbols
 "----------------
