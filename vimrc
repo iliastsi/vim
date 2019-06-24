@@ -44,7 +44,7 @@ set incsearch           " Incremental search
 set noautoindent        " I indent my code myself
 set scrolloff=5         " Keep a context when scrolling
 set nomodeline          " Disable modeline for security reasons
-set gdefault            " Use 'g' flag by default with :s/foo/bar/
+"set gdefault            " Use 'g' flag by default with :s/foo/bar/
 set magic               " Use 'magic' patterns (extended regular expressions)
 set tabstop=4           " Number of spaces <tab> counts for
 set shiftwidth=4        " Used by syntax files
