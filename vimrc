@@ -9,7 +9,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'jamessan/vim-gnupg'
 Plug 'iliastsi/molokai'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -17,7 +16,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 "Plug 'iliastsi/hasksyn'
-"Plug 'vim-scripts/grep.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'w0rp/ale'
 
@@ -59,7 +57,8 @@ set wildmode=list:longest " Path/file expansion in colon-mode
 set spelllang=en_us     " Set default spelling language
 
 " Create Greek dictionary
-" mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR
+" # apt install myspell-el-gr
+" :mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR
 
 " Escape with jk
 inoremap jk <esc>
