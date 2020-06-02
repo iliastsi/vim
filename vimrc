@@ -20,6 +20,11 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'w0rp/ale'
 
+" Install extensions with:
+" :CocInstall coc-python
+" :CocInstall coc-clangd
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 
