@@ -9,14 +9,15 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'iliastsi/molokai'
+" Plug 'fatih/molokai'
+Plug 'crusoexia/vim-monokai'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 "Plug 'iliastsi/hasksyn'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 Plug 'w0rp/ale'
 
 call plug#end()
@@ -54,7 +55,9 @@ set nostartofline       " Do not jump to first character with page commands
 set laststatus=2        " status line
 set backspace=2         " Allow backspacing in insert mode
 set wildmode=list:longest " Path/file expansion in colon-mode
-set spelllang=en_us     " Set default spelling language
+set colorcolumn=80
+set spelllang=en_us,el  " Set default spelling language
+set spell
 
 " Create Greek dictionary
 " # apt install myspell-el-gr
@@ -69,22 +72,20 @@ inoremap jk <esc>
 " Enable true-colors using termguicolors
 " See `:h xterm-true-color` for the details
 "----------------------------------------------------------------------
+syntax enable
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-colo molokai
-"colo desert
+colo monokai
+" colo molokai
+" colo desert
 
-" Highlight text over 80 columns
-let w:m1=matchadd('ErrorMsg', '\%>80v.\+', -1)
-" Apply it to every window
-" (see http://vim.wikia.com/wiki/Detect_window_creation_with_WinEnter)
-autocmd VimEnter * autocmd WinEnter * let w:created=1
-autocmd VimEnter * let w:created=1
-autocmd WinEnter *
-    \ if !exists('w:created') |
-    \ let w:m1=matchadd('ErrorMsg', '\%>80v.\+', -1) |
-    \ endif
+" hi clear CocErrorSign
+" hi clear CocWarningSign
+" hi clear CocInfoSign
+" hi clear CocHintSign
+" hi clear ALEError
+" hi clear ALEWarning
 
 
 "----------------------------------------------------------------------
@@ -94,22 +95,10 @@ autocmd WinEnter *
 " CtrlP
 "------
 " Do not delete the cache files upon exiting Vim
-"let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_clear_cache_on_exit = 0
 
 " AirLine symbols
 "----------------
-let g:airline_symbols = {}
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␤ '
-let g:airline_symbols.branch = '⎇ '
-" Control which sections get truncated and at what width
-let g:airline#extensions#default#section_truncate_width = {
-    \ 'b': 60,
-    \ 'x': 70,
-    \ 'y': 70,
-    \ 'z': 40,
-    \ }
 " Mixed-indent errors
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -131,9 +120,43 @@ let g:ale_linters = {
 
 
 "----------------------------------------------------------------------
+" Helper functions
+"----------------------------------------------------------------------
+" Git commit message
+function! CommitMessages()
+    let g:git_ci_msg_user = substitute(system("git config --get user.name"),
+              \ '\n$', '', '')
+    let g:git_ci_msg_email = substitute(system("git config --get user.email"),
+              \ '\n$', '', '')
+
+    nmap <leader>s oSigned-off-by: <C-R>=printf("%s <%s>",
+              \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
+    nmap <leader>r oReviewed-by: <C-R>=printf("%s <%s>",
+                \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
+endf
+
+" Mail
+function! MailSnip(type, ...)
+    let sel_save = &selection
+    let &selection = "inclusive"
+    let reg_save = @@
+
+    if a:0  " Invoked from Visual mode, use gv command.
+        silent execute "normal! gvc> [...]"
+    elseif a:type == 'line'
+        silent exe "normal! '[V']c> [...]"
+    else
+        silent exe "normal! `[v`]c> [...]"
+    endif
+
+    let &selection = sel_save
+    let @@ = reg_save
+endfunction
+
+
+"----------------------------------------------------------------------
 " File-type specific settings.
 "----------------------------------------------------------------------
-syntax on
 
 " For *.h files use C syntax instead of C++
 let c_syntax_for_h = 1
@@ -166,45 +189,14 @@ au FileType                 python
 au FileType                 tex
     \ setlocal tw=80 sw=2
 
-" Git commit message
-function! CommitMessages()
-    set spelllang=en_us spell
-    let g:git_ci_msg_user = substitute(system("git config --get user.name"),
-              \ '\n$', '', '')
-    let g:git_ci_msg_email = substitute(system("git config --get user.email"),
-              \ '\n$', '', '')
-
-    nmap <leader>s oSigned-off-by: <C-R>=printf("%s <%s>",
-              \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
-    nmap <leader>r oReviewed-by: <C-R>=printf("%s <%s>",
-                \ g:git_ci_msg_user, g:git_ci_msg_email)<CR><ESC>0
-endf
+" Git
 au FileType                 gitcommit
     \ call CommitMessages()
 au BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt
     \ call CommitMessages()
 
 " Mail
-function! MailSnip(type, ...)
-    let sel_save = &selection
-    let &selection = "inclusive"
-    let reg_save = @@
-
-    if a:0  " Invoked from Visual mode, use gv command.
-        silent execute "normal! gvc> [...]"
-    elseif a:type == 'line'
-        silent exe "normal! '[V']c> [...]"
-    else
-        silent exe "normal! `[v`]c> [...]"
-    endif
-
-    let &selection = sel_save
-    let @@ = reg_save
-endfunction
-
 au BufRead,BufNewFile *mutt* set filetype=mail
-au FileType                 mail,debchangelog
-    \ set spelllang=en_us,el spell
 au FileType                 mail
     \ nnoremap <silent> <leader>n :set opfunc=MailSnip<CR>g@
 au FileType                 mail
@@ -213,7 +205,7 @@ au FileType                 mail
 " reStructuredText
 " https://docs.python.org/devguide/documenting.html
 au FileType rst
-    \ set sw=3 sts=3 et tw=80 spell
+    \ set sw=3 sts=3 et tw=80
 
 
 "----------------------------------------------------------------------
