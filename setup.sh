@@ -47,7 +47,7 @@ else
     plugins_ide=1
 fi
 
-spell_el=$(ask "Create Greek dictionary" Y; echo $?)
+spell_el=$(ask "Create Greek dictionary (requires myspell-el-gr)" Y; echo $?)
 
 # Create symlink
 if [ ! -e ~/.vimrc ]; then
@@ -65,7 +65,6 @@ if [ $plugins -eq 0 ]; then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
-
     echo "let g:vimrc_settings_plugins = 1" >> ~/.vim/settings.vimrc
 else
     echo "let g:vimrc_settings_plugins = 0" >> ~/.vim/settings.vimrc

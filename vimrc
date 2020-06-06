@@ -104,10 +104,6 @@ else
     set spelllang=en_us
 endif
 
-" Create Greek dictionary
-" # apt install myspell-el-gr
-" :mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR
-
 " Escape with jk
 inoremap jk <esc>
 
