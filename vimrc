@@ -3,9 +3,14 @@
 " Author: Ilias Tsitsimpis <i.tsitsimpis@gmail.com>
 "----------------------------------------------------------------------
 
+source ~/.vim/settings.vimrc
+
+
 "----------------------------------------------------------------------
 " Plugins
 "----------------------------------------------------------------------
+if get(g:, "vimrc_settings_plugins")
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -18,14 +23,44 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 "Plug 'iliastsi/hasksyn'
 Plug 'tpope/vim-commentary'
-Plug 'w0rp/ale'
 
 " Install extensions with:
 " :CocInstall coc-python
 " :CocInstall coc-clangd
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if get(g:, "vimrc_settings_plugins_ide")
+    Plug 'dense-analysis/ale'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 
 call plug#end()
+
+" CtrlP
+"------
+" Do not delete the cache files upon exiting Vim
+let g:ctrlp_clear_cache_on_exit = 0
+
+" AirLine symbols
+"----------------
+" Mixed-indent errors
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
+" Enable airline's native extension for ale
+let g:airline#extensions#ale#enabled = 1
+
+" Ale
+"----
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_cache_executable_check_failures = 1
+
+let g:ale_linters = {
+\ 'haskell': ['hdevtools', 'hlint'],
+\ 'python': ['python', 'flake8'],
+\ 'c': ['gcc'],
+\}
+
+endif " g:vimrc_settings_plugins
 
 
 "----------------------------------------------------------------------
@@ -61,8 +96,13 @@ set laststatus=2        " status line
 set backspace=2         " Allow backspacing in insert mode
 set wildmode=list:longest " Path/file expansion in colon-mode
 set colorcolumn=80
-set spelllang=en_us,el  " Set default spelling language
 set spell
+
+if get(g:, "vimrc_settings_spell_el")
+    set spelllang=en_us,el
+else
+    set spelllang=en_us
+endif
 
 " Create Greek dictionary
 " # apt install myspell-el-gr
@@ -81,9 +121,12 @@ syntax enable
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-colo monokai
-" colo molokai
-" colo desert
+try
+    " colo molokai
+    colo monokai
+catch /^Vim\%((\a\+)\)\=:E185/
+    colo desert
+endtry
 
 " hi clear CocErrorSign
 " hi clear CocWarningSign
@@ -91,37 +134,6 @@ colo monokai
 " hi clear CocHintSign
 " hi clear ALEError
 " hi clear ALEWarning
-
-
-"----------------------------------------------------------------------
-" Configure plugins
-"----------------------------------------------------------------------
-
-" CtrlP
-"------
-" Do not delete the cache files upon exiting Vim
-let g:ctrlp_clear_cache_on_exit = 0
-
-" AirLine symbols
-"----------------
-" Mixed-indent errors
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-" Enable airline's native extension for ale
-let g:airline#extensions#ale#enabled = 1
-
-" Ale
-"----
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_cache_executable_check_failures = 1
-
-let g:ale_linters = {
-\ 'haskell': ['hdevtools', 'hlint'],
-\ 'python': ['python', 'flake8'],
-\ 'c': ['gcc'],
-\}
 
 
 "----------------------------------------------------------------------
