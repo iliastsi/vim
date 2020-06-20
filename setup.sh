@@ -47,11 +47,7 @@ else
     plugins_ide=1
 fi
 
-if [ -f ~/.vim/spell/el.utf-8.spl ]; then
-    spell_el=1
-else
-    spell_el=$(ask "Create Greek dictionary (requires myspell-el-gr)" Y; echo $?)
-fi
+spell_el=$(ask "Create Greek dictionary (requires myspell-el-gr)" Y; echo $?)
 
 # Create symlink
 if [ ! -e ~/.vimrc ]; then
@@ -81,7 +77,9 @@ else
 fi
 
 if [ $spell_el -eq 0 ]; then
-    vim -e -c "mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR" -c "qa"
+    if [ ! -f ~/.vim/spell/el.utf-8.spl ]; then
+        vim -e -c "mkspell ~/.vim/spell/el /usr/share/hunspell/el_GR" -c "qa"
+    fi
     echo "let g:vimrc_settings_spell_el = 1" >> ~/.vim/settings.vimrc
 else
     echo "let g:vimrc_settings_spell_el = 0" >> ~/.vim/settings.vimrc
