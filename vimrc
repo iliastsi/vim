@@ -19,7 +19,6 @@ Plug 'crusoexia/vim-monokai'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 "Plug 'iliastsi/hasksyn'
 Plug 'tpope/vim-commentary'
@@ -28,6 +27,7 @@ Plug 'tpope/vim-commentary'
 " :CocInstall coc-python
 " :CocInstall coc-clangd
 if get(g:, "vimrc_settings_plugins_ide")
+    Plug 'tpope/vim-fugitive'
     Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
@@ -214,6 +214,8 @@ au FileType                 mail
     \ nnoremap <silent> <leader>n :set opfunc=MailSnip<CR>g@
 au FileType                 mail
     \ vnoremap <silent> <leader>n :<C-U>call MailSnip(visualmode(), 1)<CR>
+au FileType                 mail
+    \ set colorcolumn=73
 
 " reStructuredText
 " https://docs.python.org/devguide/documenting.html
