@@ -38,6 +38,8 @@ call plug#end()
 "------
 " Do not delete the cache files upon exiting Vim
 let g:ctrlp_clear_cache_on_exit = 0
+" The maximum number of files to scan
+let g:ctrlp_max_files=0
 
 " AirLine symbols
 "----------------
@@ -221,6 +223,10 @@ au FileType                 mail
 " https://docs.python.org/devguide/documenting.html
 au FileType rst
     \ set sw=3 sts=3 et tw=80
+
+" Javascript code
+au FileType                 javascript,javascriptreact
+    \ setlocal sw=2 sts=2
 
 
 "----------------------------------------------------------------------
