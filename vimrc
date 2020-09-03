@@ -97,7 +97,7 @@ set nostartofline       " Do not jump to first character with page commands
 set laststatus=2        " status line
 set backspace=2         " Allow backspacing in insert mode
 set wildmode=list:longest " Path/file expansion in colon-mode
-set colorcolumn=80
+set colorcolumn=81
 set spell
 
 if get(g:, "vimrc_settings_spell_el")
@@ -198,7 +198,7 @@ au FileType                 haskell
 
 " Python code
 au FileType                 python
-    \ setlocal sw=4 sts=4
+    \ setlocal sw=4 sts=4 colorcolumn=80
 
 " Latex code
 au FileType                 tex
@@ -207,6 +207,8 @@ au FileType                 tex
 " Git
 au FileType                 gitcommit
     \ call CommitMessages()
+au FileType                 gitcommit
+    \ set colorcolumn=73
 au BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt
     \ call CommitMessages()
 
