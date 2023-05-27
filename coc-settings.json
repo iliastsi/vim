@@ -1,7 +1,5 @@
 {
     "diagnostic.checkCurrentLine": true,
     "diagnostic.messageTarget": "echo",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": false,
     "python.linting.enabled": false
 }
