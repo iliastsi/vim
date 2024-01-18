@@ -243,6 +243,10 @@ runtime macros/matchit.vim
 au FileType                 c,cpp,go
     \ setlocal cindent sw=8 ts=8 noet cino=(sw
 
+" Makefiles
+au FileType                 make
+    \ setlocal noet
+
 " Haskell code
 au FileType                 haskell
     \ setlocal sw=2 ts=2
