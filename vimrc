@@ -28,6 +28,11 @@ Plug 'tpope/vim-commentary'
 " :CocInstall coc-go
 " :CocInstall coc-rust-analyzer
 " :CocInstall coc-clangd
+" Update extensions with
+" :PlugUpgrade
+" :PlugUpdate
+" :CocUpdate
+" :CocCommand go.install.tools
 if get(g:, "vimrc_settings_plugins_ide")
     Plug 'tpope/vim-fugitive'
     Plug 'dense-analysis/ale'
