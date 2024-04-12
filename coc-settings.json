@@ -1,8 +1,13 @@
 {
-    "diagnostic.checkCurrentLine": true,
-    "diagnostic.messageTarget": "echo",
-    "inlayHint.enable": false,
-    "python.linting.enabled": false,
-    "pyright.inlayHints.functionReturnTypes": true,
-    "pyright.inlayHints.variableTypes": false
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageTarget": "echo",
+  "inlayHint.enable": false,
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"]
+    }
+  }
 }

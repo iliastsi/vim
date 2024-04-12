@@ -14,7 +14,7 @@ if get(g:, "vimrc_settings_plugins")
 call plug#begin('~/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'fatih/molokai'
+"Plug 'fatih/molokai'
 Plug 'crusoexia/vim-monokai'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -35,7 +35,7 @@ Plug 'tpope/vim-commentary'
 " :CocCommand go.install.tools
 if get(g:, "vimrc_settings_plugins_ide")
     Plug 'tpope/vim-fugitive'
-    Plug 'dense-analysis/ale'
+    "Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
@@ -54,8 +54,9 @@ let g:ctrlp_max_files=0
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long' ]
-" Enable airline's native extension for ale
-let g:airline#extensions#ale#enabled = 1
+" Enable airline's native extension for CoC/ale
+"let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 
 " Ale
 "----
