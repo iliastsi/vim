@@ -20,7 +20,6 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-unimpaired'
-"Plug 'iliastsi/hasksyn'
 Plug 'tpope/vim-commentary'
 
 " Install extensions with:
@@ -35,6 +34,7 @@ Plug 'tpope/vim-commentary'
 " :CocCommand go.install.tools
 if get(g:, "vimrc_settings_plugins_ide")
     Plug 'tpope/vim-fugitive'
+    Plug 'itchyny/vim-haskell-indent'
     "Plug 'dense-analysis/ale'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
@@ -124,9 +124,14 @@ inoremap jk <esc>
 " See `:h xterm-true-color` for the details
 "----------------------------------------------------------------------
 syntax enable
+" Enable the gui color
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
+" If you are using vim with tmux, you need to turn off the italic.
+" tmux doesn't support italic font, all italic effect will become "reverse".
+let g:monokai_gui_italic = 0
+let g:monokai_term_italic = 0
 try
     " colo molokai
     colo monokai
